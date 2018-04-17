@@ -27,6 +27,13 @@ def postdelete():
     model.delete_entry(int(id))
     return redirect('/')
 
+@app.route("/modify", methods=["POST"])
+def postmodify():
+    id = request.form['id']
+    text=request.form['new_message']
+    model.modify_entry(int(id),text)
+    return redirect('/')
+
 if __name__=="__main__":
     model.init()
     app.run(debug=True)

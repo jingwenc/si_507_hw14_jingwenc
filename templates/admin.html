@@ -6,8 +6,12 @@
 
 {% for e in entries %}
     <div class="entry">
-        <p class="entrytext"> {{e['text']}} </p>
-        <p class="metadata"> by {{e['author']}} on {{e['timestamp']}} </p>
+        <form action="/modify" method="POST">
+            <p class="entrytext"> {{e['text']}} </p>
+            <p><textarea name="new_message" rows=3 cols=50></textarea><input type="submit" value="modify"></p>
+            <p class="metadata"> by {{e['author']}} on {{e['timestamp']}} </p>
+            <input type="hidden" name="id" value= {{e['id']}}>
+        </form>
         <form action="/delete" method="POST">
             <!-- <p class="metadata"> id:{{e['id']}} </p> -->
             <p class="metadata"><input type="hidden" name="id" value= {{e['id']}} >id:{{e['id']}}</p>

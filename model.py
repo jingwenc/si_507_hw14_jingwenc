@@ -62,4 +62,29 @@ def delete_entry(id):
     except:
         print('Error!')
 
+def modify_entry(id,text):
+    global entries, GUESTBOOK_ENTRIES_FILE
+    now = datetime.now()
+    # time_string = now.strftime("%b %d, %Y %-I:%M %p")
+    # if you have an error using this format, just use
+    time_string = str(now)
+    try:
+        with open(GUESTBOOK_ENTRIES_FILE,'r+') as f:
+            content=json.load(f)
+            for i in content:
+                if id == int(i['id']):
+                    i['text']=text
+                    i['timestamp']=time_string
+            entries = content
+            f.seek(0)
+            f.truncate()
+            json.dump(content, f)
+        # with open(GUESTBOOK_ENTRIES_FILE) as f:
+        #     content=json.load(f)
+        #     print(content)
+        print('Modified id:',id)
+    except:
+        print('Error!')
+
+# modify_entry(3,'hello')
 # delete_entry(7)
